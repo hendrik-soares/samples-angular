@@ -1,0 +1,69 @@
+:host {
+  position: relative;
+  overflow: hidden;
+  --bs-btn-padding-x: 0.75rem;
+  --bs-btn-padding-y: 0.375rem;
+  --bs-btn-font-family: ;
+  --bs-btn-font-size: 1rem;
+  --bs-btn-font-weight: 400;
+  --bs-btn-line-height: 1.5;
+  --bs-btn-border-width: 2px;
+  --bs-btn-border-radius: .5rem;
+  display: inline-block;
+  padding: var(--bs-btn-padding-y) var(--bs-btn-padding-x);
+  font-family: var(--bs-btn-font-family);
+  font-size: var(--bs-btn-font-size);
+  font-weight: var(--bs-btn-font-weight);
+  line-height: var(--bs-btn-line-height);
+  color: var(--bs-btn-color);
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  border: var(--bs-btn-border-width) solid var(--bs-btn-border-color);
+  border-radius: var(--bs-btn-border-radius);
+  background-color: var(--bs-btn-bg);
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+:host ::ng-deep span.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 600ms linear;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+$colors: (
+  "primary":      white,
+  "secondary":    white,
+  "tertiary":     white,
+  "quaternary":   black,
+  "success":      white,
+  "danger":       white,
+  "warning":      black,
+  "info":         white,
+);
+
+@each $bgColor, $color in $colors {
+  :host(.#{$bgColor}) {
+    background-color: var(--#{$bgColor});
+    color: var(--#{$color});
+    --bs-btn-border-color: var(--#{$bgColor});
+  }
+  :host(.#{$bgColor}-outline) {
+    background-color: transparent;
+    color: var(--#{$bgColor});
+    border: 2px solid var(--#{$bgColor});
+  }
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
